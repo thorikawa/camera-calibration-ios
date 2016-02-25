@@ -1,0 +1,401 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		EE2D8D7E1C7F015B0004F1FC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2D8D7D1C7F015B0004F1FC /* main.m */; };
+		EE2D8D811C7F015B0004F1FC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EE2D8D801C7F015B0004F1FC /* AppDelegate.m */; };
+		EE2D8D841C7F015B0004F1FC /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = EE2D8D831C7F015B0004F1FC /* ViewController.mm */; };
+		EE2D8D871C7F015B0004F1FC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE2D8D851C7F015B0004F1FC /* Main.storyboard */; };
+		EE2D8D891C7F015B0004F1FC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EE2D8D881C7F015B0004F1FC /* Assets.xcassets */; };
+		EE2D8D8C1C7F015B0004F1FC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE2D8D8A1C7F015B0004F1FC /* LaunchScreen.storyboard */; };
+		EE658FFF1C7F02F100FE63A0 /* Calibrator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EE658FFD1C7F02F100FE63A0 /* Calibrator.cpp */; };
+		EECA2EF51C7F0A4200AAEA40 /* VideoSource.mm in Sources */ = {isa = PBXBuildFile; fileRef = EECA2EF41C7F0A4200AAEA40 /* VideoSource.mm */; };
+		FA955ED895C8EA381B0CBE49 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 038F587D0CC8D5CF6459773F /* libPods.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		038F587D0CC8D5CF6459773F /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		6725A9A1449DF23AF45BE3E7 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		C221B2D9229747657820B918 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		EE2D8D791C7F015B0004F1FC /* camera-calibration.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "camera-calibration.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EE2D8D7D1C7F015B0004F1FC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		EE2D8D7F1C7F015B0004F1FC /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		EE2D8D801C7F015B0004F1FC /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		EE2D8D821C7F015B0004F1FC /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		EE2D8D831C7F015B0004F1FC /* ViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ViewController.mm; sourceTree = "<group>"; };
+		EE2D8D861C7F015B0004F1FC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		EE2D8D881C7F015B0004F1FC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		EE2D8D8B1C7F015B0004F1FC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		EE2D8D8D1C7F015B0004F1FC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EE658FFD1C7F02F100FE63A0 /* Calibrator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Calibrator.cpp; sourceTree = "<group>"; };
+		EE658FFE1C7F02F100FE63A0 /* Calibrator.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Calibrator.hpp; sourceTree = "<group>"; };
+		EECA2EF31C7F0A4200AAEA40 /* VideoSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoSource.h; sourceTree = "<group>"; };
+		EECA2EF41C7F0A4200AAEA40 /* VideoSource.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = VideoSource.mm; sourceTree = "<group>"; };
+		EECA2EF61C7F0A9800AAEA40 /* BGRAVideoFrame.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BGRAVideoFrame.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		EE2D8D761C7F015B0004F1FC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FA955ED895C8EA381B0CBE49 /* libPods.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		8551F0E203BE219EAD9980BE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				038F587D0CC8D5CF6459773F /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		EE2D8D701C7F015B0004F1FC = {
+			isa = PBXGroup;
+			children = (
+				EE2D8D7B1C7F015B0004F1FC /* camera-calibration */,
+				EE2D8D7A1C7F015B0004F1FC /* Products */,
+				FA91881B97F336928587709A /* Pods */,
+				8551F0E203BE219EAD9980BE /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		EE2D8D7A1C7F015B0004F1FC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EE2D8D791C7F015B0004F1FC /* camera-calibration.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EE2D8D7B1C7F015B0004F1FC /* camera-calibration */ = {
+			isa = PBXGroup;
+			children = (
+				EE2D8D7F1C7F015B0004F1FC /* AppDelegate.h */,
+				EE2D8D801C7F015B0004F1FC /* AppDelegate.m */,
+				EE2D8D821C7F015B0004F1FC /* ViewController.h */,
+				EE2D8D831C7F015B0004F1FC /* ViewController.mm */,
+				EE2D8D851C7F015B0004F1FC /* Main.storyboard */,
+				EE2D8D881C7F015B0004F1FC /* Assets.xcassets */,
+				EE2D8D8A1C7F015B0004F1FC /* LaunchScreen.storyboard */,
+				EE2D8D8D1C7F015B0004F1FC /* Info.plist */,
+				EE2D8D7C1C7F015B0004F1FC /* Supporting Files */,
+				EE658FFD1C7F02F100FE63A0 /* Calibrator.cpp */,
+				EE658FFE1C7F02F100FE63A0 /* Calibrator.hpp */,
+				EECA2EF61C7F0A9800AAEA40 /* BGRAVideoFrame.h */,
+				EECA2EF31C7F0A4200AAEA40 /* VideoSource.h */,
+				EECA2EF41C7F0A4200AAEA40 /* VideoSource.mm */,
+			);
+			path = "camera-calibration";
+			sourceTree = "<group>";
+		};
+		EE2D8D7C1C7F015B0004F1FC /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				EE2D8D7D1C7F015B0004F1FC /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		FA91881B97F336928587709A /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C221B2D9229747657820B918 /* Pods.debug.xcconfig */,
+				6725A9A1449DF23AF45BE3E7 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		EE2D8D781C7F015B0004F1FC /* camera-calibration */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EE2D8D901C7F015B0004F1FC /* Build configuration list for PBXNativeTarget "camera-calibration" */;
+			buildPhases = (
+				D4E0042990D5FFCF171F261B /* Check Pods Manifest.lock */,
+				EE2D8D751C7F015B0004F1FC /* Sources */,
+				EE2D8D761C7F015B0004F1FC /* Frameworks */,
+				EE2D8D771C7F015B0004F1FC /* Resources */,
+				2A927C8979933A2AE6163A18 /* Embed Pods Frameworks */,
+				6A7C510DED9CE727795CBF0A /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "camera-calibration";
+			productName = "camera-calibration";
+			productReference = EE2D8D791C7F015B0004F1FC /* camera-calibration.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		EE2D8D711C7F015B0004F1FC /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0720;
+				ORGANIZATIONNAME = "Takahiro Horikawa";
+				TargetAttributes = {
+					EE2D8D781C7F015B0004F1FC = {
+						CreatedOnToolsVersion = 7.2.1;
+					};
+				};
+			};
+			buildConfigurationList = EE2D8D741C7F015B0004F1FC /* Build configuration list for PBXProject "camera-calibration" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = EE2D8D701C7F015B0004F1FC;
+			productRefGroup = EE2D8D7A1C7F015B0004F1FC /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				EE2D8D781C7F015B0004F1FC /* camera-calibration */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		EE2D8D771C7F015B0004F1FC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EE2D8D8C1C7F015B0004F1FC /* LaunchScreen.storyboard in Resources */,
+				EE2D8D891C7F015B0004F1FC /* Assets.xcassets in Resources */,
+				EE2D8D871C7F015B0004F1FC /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		2A927C8979933A2AE6163A18 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6A7C510DED9CE727795CBF0A /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D4E0042990D5FFCF171F261B /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		EE2D8D751C7F015B0004F1FC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EECA2EF51C7F0A4200AAEA40 /* VideoSource.mm in Sources */,
+				EE658FFF1C7F02F100FE63A0 /* Calibrator.cpp in Sources */,
+				EE2D8D841C7F015B0004F1FC /* ViewController.mm in Sources */,
+				EE2D8D811C7F015B0004F1FC /* AppDelegate.m in Sources */,
+				EE2D8D7E1C7F015B0004F1FC /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		EE2D8D851C7F015B0004F1FC /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EE2D8D861C7F015B0004F1FC /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		EE2D8D8A1C7F015B0004F1FC /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EE2D8D8B1C7F015B0004F1FC /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		EE2D8D8E1C7F015B0004F1FC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		EE2D8D8F1C7F015B0004F1FC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		EE2D8D911C7F015B0004F1FC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C221B2D9229747657820B918 /* Pods.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ENABLE_BITCODE = NO;
+				INFOPLIST_FILE = "camera-calibration/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.polysfactory.camera-calibration";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		EE2D8D921C7F015B0004F1FC /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6725A9A1449DF23AF45BE3E7 /* Pods.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ENABLE_BITCODE = NO;
+				INFOPLIST_FILE = "camera-calibration/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.polysfactory.camera-calibration";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		EE2D8D741C7F015B0004F1FC /* Build configuration list for PBXProject "camera-calibration" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EE2D8D8E1C7F015B0004F1FC /* Debug */,
+				EE2D8D8F1C7F015B0004F1FC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EE2D8D901C7F015B0004F1FC /* Build configuration list for PBXNativeTarget "camera-calibration" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EE2D8D911C7F015B0004F1FC /* Debug */,
+				EE2D8D921C7F015B0004F1FC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = EE2D8D711C7F015B0004F1FC /* Project object */;
+}
