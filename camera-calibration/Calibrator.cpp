@@ -26,6 +26,8 @@ int Calibrator::processFrame(BGRAVideoFrame frame) {
     cv::Mat view(frame.height, frame.width, CV_8UC4, frame.data, frame.stride);
     cv::Mat viewGray;
     
+    printf("process frame\n");
+    
     imageSize = view.size();
     
     vector<Point2f> pointbuf;
@@ -55,6 +57,7 @@ int Calibrator::processFrame(BGRAVideoFrame frame) {
     if( mode == CAPTURING && found &&
        (clock() - prevTimestamp > delay*1e-3*CLOCKS_PER_SEC) )
     {
+        printf("pattern found\n");
         imagePoints.push_back(pointbuf);
         prevTimestamp = clock();
     }

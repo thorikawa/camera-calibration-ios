@@ -38,6 +38,10 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)btnStartPressed:(id)sender {
+    self.calibrator->startCapturing();
+}
+
 #pragma mark - VideoSourceDelegate
 -(void)frameReady:(BGRAVideoFrame) frame
 {
@@ -47,7 +51,7 @@
     });
     
     // And perform processing in current thread
-//    self.calibrator->processFrame(frame);
+    self.calibrator->processFrame(frame);
     
     // When it's done we query rendering from main thread
     dispatch_async( dispatch_get_main_queue(), ^{
