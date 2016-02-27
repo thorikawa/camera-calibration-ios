@@ -5,5 +5,5 @@ OpenCV camera calibration app for iOS
 Just run the app and press the start button.
 After the calibration, you can copy the result yaml file by using iTunes  file sharing.
 
-# Achknowledgement
+# Acknowledgement
 Most part of this app is copied from opencv sample.
