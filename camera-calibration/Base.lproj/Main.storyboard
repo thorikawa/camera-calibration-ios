@@ -17,22 +17,39 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AC1-Ut-FuP">
-                                <rect key="frame" x="228" y="188" width="144" height="72"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AC1-Ut-FuP">
+                                <rect key="frame" x="228" y="28" width="144" height="72"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="Button">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="72" id="tvr-tf-4Oo"/>
+                                    <constraint firstAttribute="width" constant="144" id="uOI-zc-AdN"/>
+                                </constraints>
+                                <state key="normal" title="Start">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="btnStartPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="tJp-hx-JjR"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3sJ-jd-rbR">
+                                <rect key="frame" x="120" y="140" width="360" height="240"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="360" id="N3e-u9-dWx"/>
+                                    <constraint firstAttribute="height" constant="240" id="ujo-ej-k4S"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="3sJ-jd-rbR" firstAttribute="top" secondItem="AC1-Ut-FuP" secondAttribute="bottom" constant="20" id="Ab7-FE-mC8"/>
+                            <constraint firstItem="3sJ-jd-rbR" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Sdh-ck-3kv"/>
                             <constraint firstItem="AC1-Ut-FuP" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="aS4-Sz-wpb"/>
+                            <constraint firstItem="AC1-Ut-FuP" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="p6M-DP-m7H"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="imageView" destination="3sJ-jd-rbR" id="Wcn-op-n3k"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

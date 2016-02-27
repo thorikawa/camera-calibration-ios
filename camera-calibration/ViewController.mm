@@ -23,8 +23,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    self.videoSource = [[VideoSource alloc] init];
+    self.videoSource = [[VideoSource alloc] initWithPreset:AVCaptureSessionPreset1280x720];
     self.videoSource.delegate = self;
+    // [self.videoSource setPreview:self.imageView];
     [self.videoSource startWithDevicePosition:AVCaptureDevicePositionBack];
     
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -52,12 +53,52 @@
     
     // And perform processing in current thread
     self.calibrator->processFrame(frame);
+    UIImage* originalImage = [self UIImageByFrame:frame];
+    UIImage* image = [ViewController resizedImage:originalImage width:320 height:180];
     
     // When it's done we query rendering from main thread
     dispatch_async( dispatch_get_main_queue(), ^{
-//        [self.visualizationController setTransformationList:(self.markerDetector->getTransformations)()];
-//        [self.visualizationController drawFrame];
+//        NSLog(@"main");
+        self.imageView.image = image;
+        [self.imageView setNeedsDisplay];
     });
+}
+
++ (UIImage *)resizedImage:(UIImage *)image width:(CGFloat)width height:(CGFloat)height
+{
+    UIGraphicsBeginImageContextWithOptions(CGSizeMake(width, height), NO, [[UIScreen mainScreen] scale]);
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetInterpolationQuality(context, kCGInterpolationHigh);
+    
+    [image drawInRect:CGRectMake(0.0, 0.0, width, height)];
+    
+    UIImage *resizedImage = UIGraphicsGetImageFromCurrentImageContext();
+    
+    UIGraphicsEndImageContext();
+    
+    return resizedImage;
+}
+
+-(UIImage*) UIImageByFrame:(BGRAVideoFrame) frame
+{
+    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+    NSData *data =
+    [NSData dataWithBytes:frame.data length:frame.height*frame.stride];
+    CGDataProviderRef provider =
+    CGDataProviderCreateWithCFData((CFDataRef)data);
+    CGImageRef imageRef = CGImageCreate(
+                                        frame.width, frame.height,
+                                        8, 4*8, frame.stride,
+                                        colorSpace, kCGImageAlphaNone|kCGBitmapByteOrderDefault,
+                                        provider, NULL, false, kCGRenderingIntentDefault
+                                        );
+    UIImage *ret = [UIImage imageWithCGImage:imageRef];
+    CGImageRelease(imageRef);
+    CGDataProviderRelease(provider);
+    CGColorSpaceRelease(colorSpace);
+
+    return ret;
 }
 
 @end

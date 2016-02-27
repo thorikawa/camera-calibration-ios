@@ -26,21 +26,20 @@
 
 #pragma mark - Memory management
 
-- (id)init
+- (id)initWithPreset: (NSString* const) preset
 {
     if ((self = [super init]))
     {
         AVCaptureSession * capSession = [[AVCaptureSession alloc] init];
         
-        if ([capSession canSetSessionPreset:AVCaptureSessionPreset640x480])
+        if ([capSession canSetSessionPreset:preset])
         {
-            [capSession setSessionPreset:AVCaptureSessionPreset640x480];
-            NSLog(@"Set capture session preset AVCaptureSessionPreset640x480");
+            [capSession setSessionPreset:preset];
+             NSLog(@"Set capture session preset %@", preset);
         }
-        else if ([capSession canSetSessionPreset:AVCaptureSessionPresetLow])
+        else
         {
-            [capSession setSessionPreset:AVCaptureSessionPresetLow];
-            NSLog(@"Set capture session preset AVCaptureSessionPresetLow");
+            NSLog(@"The preset is not yet supported: %@.", preset);
         }
         
         self.captureSession = capSession;
@@ -128,7 +127,11 @@
 - (bool) startWithDevicePosition:(AVCaptureDevicePosition)devicePosition
 {
     AVCaptureDevice *videoDevice = [self cameraWithPosition:devicePosition];
-    
+    [videoDevice lockForConfiguration:nil];
+    videoDevice.exposureMode = AVCaptureExposureModeLocked;
+    videoDevice.focusMode =AVCaptureFocusModeLocked;
+    [videoDevice unlockForConfiguration];
+
     if (!videoDevice)
         return FALSE;
     
@@ -156,7 +159,7 @@
             return FALSE;
         }
     }
-    
+
     [self addRawViewOutput];
     [captureSession startRunning];
     return TRUE;
@@ -186,4 +189,14 @@ didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
 	CVPixelBufferUnlockBaseAddress(imageBuffer,0);
 } 
 
+- (void) setPreview:(UIImageView*) imageView
+{
+    AVCaptureVideoPreviewLayer *previewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:self.captureSession];
+    previewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
+    previewLayer.frame = imageView.bounds;
+    
+    CALayer *previewViewLayer = imageView.layer;
+    previewViewLayer.masksToBounds = YES;
+    [previewViewLayer addSublayer:previewLayer];
+}
 @end

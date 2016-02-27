@@ -34,7 +34,9 @@
 @property (nonatomic, retain) AVCaptureDeviceInput    * deviceInput;
 @property (nonatomic, retain) id<VideoSourceDelegate>   delegate;
 
+- (id) initWithPreset: (NSString* const) preset;
 - (bool) startWithDevicePosition:(AVCaptureDevicePosition)devicePosition;
 - (CGSize) getFrameSize;
+- (void) setPreview:(UIImageView*) imageView;
 
 @end

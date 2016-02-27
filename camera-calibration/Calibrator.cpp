@@ -12,8 +12,8 @@
 using namespace cv;
 using namespace std;
 
-Calibrator::Calibrator(string outputPath) : squareSize(1.f), aspectRatio(1.f), pattern(CHESSBOARD), mode(DETECTION), writeExtrinsics(true), writePoints(true), flipVertical(false), undistortImage(false), nframes(10), flags(0), delay(1000), prevTimestamp(0) {
-    boardSize = Size(4, 5);
+Calibrator::Calibrator(string outputPath) : squareSize(0.25f), aspectRatio(1.f), pattern(ASYMMETRIC_CIRCLES_GRID), mode(DETECTION), writeExtrinsics(false), writePoints(false), flipVertical(false), undistortImage(false), nframes(40), flags(0), delay(1000), prevTimestamp(0) {
+    boardSize = cv::Size(4, 11);
     this->outputPath = outputPath;
 }
 
@@ -36,23 +36,25 @@ int Calibrator::processFrame(BGRAVideoFrame frame) {
     bool found;
     switch( pattern )
     {
-        case CHESSBOARD:
-            found = findChessboardCorners( view, boardSize, pointbuf,
-                                          CV_CALIB_CB_ADAPTIVE_THRESH | CV_CALIB_CB_FAST_CHECK | CV_CALIB_CB_NORMALIZE_IMAGE);
+        case CHESSBOARD: {
+            int cornerFlag = CV_CALIB_CB_ADAPTIVE_THRESH | CV_CALIB_CB_NORMALIZE_IMAGE | CV_CALIB_CB_FILTER_QUADS;
+//            int cornerFlag = 0;
+            found = findChessboardCorners( view, boardSize, pointbuf, cornerFlag);
             break;
+        }
         case CIRCLES_GRID:
             found = findCirclesGrid( view, boardSize, pointbuf );
             break;
         case ASYMMETRIC_CIRCLES_GRID:
-            found = findCirclesGrid( view, boardSize, pointbuf, CALIB_CB_ASYMMETRIC_GRID );
+            found = findCirclesGrid( viewGray, boardSize, pointbuf, CALIB_CB_ASYMMETRIC_GRID );
             break;
         default:
             return fprintf( stderr, "Unknown pattern type\n" ), -1;
     }
     
     // improve the found corners' coordinate accuracy
-    if( pattern == CHESSBOARD && found) cornerSubPix( viewGray, pointbuf, Size(11,11),
-                                                     Size(-1,-1), TermCriteria( CV_TERMCRIT_EPS+CV_TERMCRIT_ITER, 30, 0.1 ));
+    if( pattern == CHESSBOARD && found) cornerSubPix( viewGray, pointbuf, cv::Size(20,20),
+                                                     cv::Size(-1,-1), TermCriteria( CV_TERMCRIT_EPS+CV_TERMCRIT_ITER, 30, 0.1 ));
     
     if( mode == CAPTURING && found &&
        (clock() - prevTimestamp > delay*1e-3*CLOCKS_PER_SEC) )
@@ -62,14 +64,17 @@ int Calibrator::processFrame(BGRAVideoFrame frame) {
         prevTimestamp = clock();
     }
     
-    if(found)
+    if(found) {
         drawChessboardCorners( view, boardSize, Mat(pointbuf), found );
+    } else {
+        printf("not found\n");
+    }
     
     string msg = mode == CAPTURING ? "100/100" :
     mode == CALIBRATED ? "Calibrated" : "Press 'g' to start";
     int baseLine = 0;
-    Size textSize = getTextSize(msg, 1, 1, 1, &baseLine);
-    Point textOrigin(view.cols - 2*textSize.width - 10, view.rows - 2*baseLine - 10);
+    cv::Size textSize = getTextSize(msg, 1, 1, 1, &baseLine);
+    cv::Point textOrigin(view.cols - 2*textSize.width - 10, view.rows - 2*baseLine - 10);
     
     if( mode == CAPTURING )
     {
@@ -96,9 +101,15 @@ int Calibrator::processFrame(BGRAVideoFrame frame) {
                        boardSize, pattern, squareSize, aspectRatio,
                        flags, cameraMatrix, distCoeffs,
                        writeExtrinsics, writePoints))
+        {
+            printf("calibration done\n");
             mode = CALIBRATED;
+        }
         else
+        {
+            printf("calibration done error\n");
             mode = DETECTION;
+        }
     }
     return 0;
 }
@@ -129,7 +140,7 @@ static double computeReprojectionErrors(
     return std::sqrt(totalErr/totalPoints);
 }
 
-void Calibrator::calcChessboardCorners(Size boardSize, float squareSize, vector<Point3f>& corners, Pattern patternType)
+void Calibrator::calcChessboardCorners(cv::Size boardSize, float squareSize, vector<Point3f>& corners, Pattern patternType)
 {
     corners.resize(0);
     
@@ -156,7 +167,7 @@ void Calibrator::calcChessboardCorners(Size boardSize, float squareSize, vector<
 }
 
 bool Calibrator::runCalibration( vector<vector<Point2f> > imagePoints,
-                           Size imageSize, Size boardSize, Pattern patternType,
+                                cv::Size imageSize, cv::Size boardSize, Pattern patternType,
                            float squareSize, float aspectRatio,
                            int flags, Mat& cameraMatrix, Mat& distCoeffs,
                            vector<Mat>& rvecs, vector<Mat>& tvecs,
@@ -188,7 +199,7 @@ bool Calibrator::runCalibration( vector<vector<Point2f> > imagePoints,
 }
 
 
-void Calibrator::saveCameraParams(Size imageSize, Size boardSize,
+void Calibrator::saveCameraParams(cv::Size imageSize, cv::Size boardSize,
                                   float squareSize, float aspectRatio, int flags,
                                   const Mat& cameraMatrix, const Mat& distCoeffs,
                                   const vector<Mat>& rvecs, const vector<Mat>& tvecs,
@@ -270,7 +281,7 @@ void Calibrator::saveCameraParams(Size imageSize, Size boardSize,
 }
 
 bool Calibrator::runAndSave(const vector<vector<Point2f> >& imagePoints,
-                            Size imageSize, Size boardSize, Pattern patternType, float squareSize,
+                            cv::Size imageSize, cv::Size boardSize, Pattern patternType, float squareSize,
                             float aspectRatio, int flags, Mat& cameraMatrix,
                             Mat& distCoeffs, bool writeExtrinsics, bool writePoints )
 {
