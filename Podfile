@@ -1,3 +1,5 @@
+target 'camera-calibration' do
+
 platform :ios, "8.0"
 
 pod 'OpenCV'
@@ -10,3 +12,4 @@ post_install do |installer|
   end
 end
 
+end
