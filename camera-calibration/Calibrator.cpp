@@ -24,9 +24,10 @@ void Calibrator::startCapturing() {
 
 int Calibrator::processFrame(BGRAVideoFrame frame) {
     cv::Mat view(frame.height, frame.width, CV_8UC4, frame.data, frame.stride);
+    cv::rotate(view, view, cv::ROTATE_90_CLOCKWISE);
     cv::Mat viewGray;
     
-    printf("process frame\n");
+    // printf("process frame\n");
     
     imageSize = view.size();
     
