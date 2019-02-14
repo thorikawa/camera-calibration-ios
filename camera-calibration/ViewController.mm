@@ -23,7 +23,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    self.videoSource = [[VideoSource alloc] initWithPreset:AVCaptureSessionPreset1280x720];
+    self.videoSource = [[VideoSource alloc] initWithPreset:AVCaptureSessionPreset1920x1080];
     self.videoSource.delegate = self;
     // [self.videoSource setPreview:self.imageView];
     [self.videoSource startWithDevicePosition:AVCaptureDevicePositionBack];
@@ -90,7 +90,7 @@
     CGImageRef imageRef = CGImageCreate(
                                         frame.width, frame.height,
                                         8, 4*8, frame.stride,
-                                        colorSpace, kCGImageAlphaNone|kCGBitmapByteOrderDefault,
+                                        colorSpace, kCGImageAlphaNoneSkipLast|kCGBitmapByteOrderDefault,
                                         provider, NULL, false, kCGRenderingIntentDefault
                                         );
     UIImage *ret = [UIImage imageWithCGImage:imageRef];
