@@ -6,10 +6,10 @@
 //  Copyright © 2016年 Takahiro Horikawa. All rights reserved.
 //
 
+#import "Calibrator.hpp"
 #import "ViewController.h"
 #import "VideoSource.h"
 #import "BGRAVideoFrame.h"
-#import "Calibrator.hpp"
 
 @interface ViewController ()<VideoSourceDelegate>
 
