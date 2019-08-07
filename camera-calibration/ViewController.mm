@@ -131,8 +131,6 @@ void CalibrationComplete(void *obj)
 }
 
 - (void)calibrationComplete {
-    NSLog(@"Calibration complete! Callback hit");
-
     dispatch_async(dispatch_get_main_queue(), ^{
         [[[UIImpactFeedbackGenerator alloc] initWithStyle:UIImpactFeedbackStyleHeavy] impactOccurred];
 
