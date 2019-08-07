@@ -1,8 +1,12 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -14,18 +18,14 @@
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AC1-Ut-FuP">
-                                <rect key="frame" x="228" y="28" width="144" height="72"/>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="72" id="tvr-tf-4Oo"/>
-                                    <constraint firstAttribute="width" constant="144" id="uOI-zc-AdN"/>
-                                </constraints>
+                                <rect key="frame" x="224" y="63" width="161" height="30"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Start">
-                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="btnStartPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="tJp-hx-JjR"/>
@@ -38,22 +38,41 @@
                                     <constraint firstAttribute="height" constant="240" id="ujo-ej-k4S"/>
                                 </constraints>
                             </imageView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="iJI-Dc-bbF">
+                                <rect key="frame" x="54" y="66" width="121" height="28"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="121" id="fj6-5y-Whi"/>
+                                    <constraint firstAttribute="height" constant="27" id="ktO-6V-ndS"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="Back"/>
+                                    <segment title="Front"/>
+                                </segments>
+                                <connections>
+                                    <action selector="cameraToggled:" destination="BYZ-38-t0r" eventType="valueChanged" id="q7G-Sx-zLm"/>
+                                </connections>
+                            </segmentedControl>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="3sJ-jd-rbR" firstAttribute="top" secondItem="AC1-Ut-FuP" secondAttribute="bottom" constant="20" id="Ab7-FE-mC8"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="AC1-Ut-FuP" secondAttribute="trailing" constant="9" id="OX5-Lz-USY"/>
+                            <constraint firstItem="iJI-Dc-bbF" firstAttribute="bottom" secondItem="AC1-Ut-FuP" secondAttribute="bottom" id="RqV-n3-B9u"/>
                             <constraint firstItem="3sJ-jd-rbR" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Sdh-ck-3kv"/>
-                            <constraint firstItem="AC1-Ut-FuP" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="aS4-Sz-wpb"/>
-                            <constraint firstItem="AC1-Ut-FuP" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="p6M-DP-m7H"/>
+                            <constraint firstItem="AC1-Ut-FuP" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="19" id="abt-YT-A8k"/>
+                            <constraint firstItem="AC1-Ut-FuP" firstAttribute="leading" secondItem="iJI-Dc-bbF" secondAttribute="trailing" constant="49" id="azO-26-Yg3"/>
+                            <constraint firstItem="iJI-Dc-bbF" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="34" id="rm5-bW-tAf"/>
+                            <constraint firstItem="3sJ-jd-rbR" firstAttribute="top" secondItem="iJI-Dc-bbF" secondAttribute="bottom" constant="47" id="x2W-gA-jDN"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="cameraSelector" destination="iJI-Dc-bbF" id="BtM-qW-KXY"/>
                         <outlet property="imageView" destination="3sJ-jd-rbR" id="Wcn-op-n3k"/>
+                        <outlet property="startButton" destination="AC1-Ut-FuP" id="WDf-Ks-Nuu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="305" y="209"/>
+            <point key="canvasLocation" x="304.34782608695656" y="208.92857142857142"/>
         </scene>
     </scenes>
 </document>
