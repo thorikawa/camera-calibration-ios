@@ -124,6 +124,11 @@
 	[self.captureSession addOutput:captureOutput];
 }
 
+- (void) stop
+{
+    [captureSession stopRunning];
+}
+
 - (bool) startWithDevicePosition:(AVCaptureDevicePosition)devicePosition
 {
     AVCaptureDevice *videoDevice = [self cameraWithPosition:devicePosition];

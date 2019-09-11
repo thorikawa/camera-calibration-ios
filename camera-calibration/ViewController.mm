@@ -37,7 +37,9 @@
 }
 
 - (void)startCameraWithDevicePosition:(AVCaptureDevicePosition)position {
-    self.videoSource = [[VideoSource alloc] initWithPreset:AVCaptureSessionPreset1920x1080];
+    [self.videoSource stop];
+
+    self.videoSource = [[VideoSource alloc] initWithPreset:AVCaptureSessionPresetHigh];
     self.videoSource.delegate = self;
     // [self.videoSource setPreview:self.imageView];
     [self.videoSource startWithDevicePosition:position];
