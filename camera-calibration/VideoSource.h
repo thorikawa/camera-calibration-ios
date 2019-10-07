@@ -36,6 +36,7 @@
 
 - (id) initWithPreset: (NSString* const) preset;
 - (bool) startWithDevicePosition:(AVCaptureDevicePosition)devicePosition;
+- (void) stop;
 - (CGSize) getFrameSize;
 - (void) setPreview:(UIImageView*) imageView;
 

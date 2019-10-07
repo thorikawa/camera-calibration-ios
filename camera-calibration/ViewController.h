@@ -12,9 +12,10 @@
 {
 }
 
+@property (weak, nonatomic) IBOutlet UIButton *startButton;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *cameraSelector;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
+
 -(IBAction)btnStartPressed:(id)sender;
 
-
 @end
-

@@ -124,12 +124,19 @@
 	[self.captureSession addOutput:captureOutput];
 }
 
+- (void) stop
+{
+    [captureSession stopRunning];
+}
+
 - (bool) startWithDevicePosition:(AVCaptureDevicePosition)devicePosition
 {
     AVCaptureDevice *videoDevice = [self cameraWithPosition:devicePosition];
     [videoDevice lockForConfiguration:nil];
     videoDevice.exposureMode = AVCaptureExposureModeLocked;
-    videoDevice.focusMode =AVCaptureFocusModeLocked;
+    if ([videoDevice isFocusModeSupported:AVCaptureFocusModeLocked]) {
+        videoDevice.focusMode = AVCaptureFocusModeLocked;
+    }
     [videoDevice unlockForConfiguration];
 
     if (!videoDevice)

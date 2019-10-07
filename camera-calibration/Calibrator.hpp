@@ -15,12 +15,14 @@
 class Calibrator
 {
 public:
-    Calibrator(std::string outputPath);
+    Calibrator(std::string outputPath, void *delegate);
     int processFrame(BGRAVideoFrame frame);
     void startCapturing();
 private:
     enum { DETECTION = 0, CAPTURING = 1, CALIBRATED = 2 };
     enum Pattern { CHESSBOARD, CIRCLES_GRID, ASYMMETRIC_CIRCLES_GRID };
+
+    void *delegate;
     
     void calcChessboardCorners(cv::Size boardSize, float squareSize, std::vector<cv::Point3f>& corners, Pattern patternType = CHESSBOARD);
     bool runCalibration( std::vector<std::vector<cv::Point2f> > imagePoints,

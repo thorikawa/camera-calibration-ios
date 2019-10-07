@@ -11,10 +11,14 @@
 #import "VideoSource.h"
 #import "BGRAVideoFrame.h"
 
-@interface ViewController ()<VideoSourceDelegate>
+#import <MessageUI/MessageUI.h>
+
+@interface ViewController ()<VideoSourceDelegate, MFMailComposeViewControllerDelegate>
 
 @property (strong, nonatomic) VideoSource * videoSource;
 @property (nonatomic) Calibrator * calibrator;
+
+@property (nonatomic) NSString *calibrationFilePath;
 
 @end
 
@@ -23,15 +27,22 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    self.videoSource = [[VideoSource alloc] initWithPreset:AVCaptureSessionPreset1920x1080];
-    self.videoSource.delegate = self;
-    // [self.videoSource setPreview:self.imageView];
-    [self.videoSource startWithDevicePosition:AVCaptureDevicePositionBack];
-    
+    [self startCameraWithDevicePosition:AVCaptureDevicePositionBack];
+
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *directory = [paths objectAtIndex:0];
     NSString *filePath = [directory stringByAppendingPathComponent:[NSString stringWithUTF8String:"camera_parameter.yml"]];
-    self.calibrator = new Calibrator([filePath UTF8String]);
+    self.calibrationFilePath = filePath;
+    self.calibrator = new Calibrator([filePath UTF8String], (__bridge void *)self);
+}
+
+- (void)startCameraWithDevicePosition:(AVCaptureDevicePosition)position {
+    [self.videoSource stop];
+
+    self.videoSource = [[VideoSource alloc] initWithPreset:AVCaptureSessionPresetHigh];
+    self.videoSource.delegate = self;
+    // [self.videoSource setPreview:self.imageView];
+    [self.videoSource startWithDevicePosition:position];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -39,7 +50,19 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)btnStartPressed:(id)sender {
+- (IBAction)cameraToggled:(UISegmentedControl *)sender {
+    AVCaptureDevicePosition position;
+    if (sender.selectedSegmentIndex == 0) { // Back camera
+        position = AVCaptureDevicePositionBack;
+    } else {
+        position = AVCaptureDevicePositionFront;
+    }
+
+    [self startCameraWithDevicePosition:position];
+}
+
+- (IBAction)btnStartPressed:(UIButton *)sender {
+    [sender setTitle:@"Calibrating..." forState:UIControlStateNormal];
     self.calibrator->startCapturing();
 }
 
@@ -58,7 +81,6 @@
     
     // When it's done we query rendering from main thread
     dispatch_async( dispatch_get_main_queue(), ^{
-//        NSLog(@"main");
         self.imageView.image = image;
         [self.imageView setNeedsDisplay];
     });
@@ -99,6 +121,46 @@
     CGColorSpaceRelease(colorSpace);
 
     return ret;
+}
+
+#pragma mark - Callback from Calibrator
+
+// C "trampoline" function to invoke Objective-C method
+void CalibrationComplete(void *obj)
+{
+    // Call the Objective-C method using Objective-C syntax
+    [(__bridge id) obj calibrationComplete];
+}
+
+- (void)calibrationComplete {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [[[UIImpactFeedbackGenerator alloc] initWithStyle:UIImpactFeedbackStyleHeavy] impactOccurred];
+
+        [self.startButton setTitle:@"Start" forState:UIControlStateNormal];
+
+        if ([MFMailComposeViewController canSendMail]) {
+            MFMailComposeViewController *mailVC = [MFMailComposeViewController new];
+            mailVC.mailComposeDelegate = self;
+            mailVC.subject = @"Calibration Data";
+            [mailVC setMessageBody:@"" isHTML:NO];
+            NSData *fileData = [NSData dataWithContentsOfFile:self.calibrationFilePath];
+            [mailVC addAttachmentData:fileData
+                             mimeType:@"text/yaml"
+                             fileName:[NSString
+                                       stringWithFormat:@"Calibration-%@.yml",
+                                       self.cameraSelector.selectedSegmentIndex == 0 ? @"Back" : @"Front"]];
+
+            [self presentViewController:mailVC animated:YES completion:nil];
+        }
+    });
+}
+
+#pragma mark Mail callback
+
+- (void)mailComposeController:(MFMailComposeViewController *)controller
+          didFinishWithResult:(MFMailComposeResult)result
+                        error:(NSError *)error {
+    [controller dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

@@ -1,4 +1,5 @@
 #include "Calibrator.hpp"
+#include "CalibrationDelegateInterface.h"
 #include "opencv2/core/core.hpp"
 #include "opencv2/imgproc/imgproc.hpp"
 #include "opencv2/calib3d/calib3d.hpp"
@@ -12,9 +13,10 @@
 using namespace cv;
 using namespace std;
 
-Calibrator::Calibrator(string outputPath) : squareSize(0.25f), aspectRatio(1.f), pattern(ASYMMETRIC_CIRCLES_GRID), mode(DETECTION), writeExtrinsics(false), writePoints(false), flipVertical(false), undistortImage(false), nframes(40), flags(0), delay(1000), prevTimestamp(0) {
+Calibrator::Calibrator(string outputPath, void *delegate) : squareSize(0.25f), aspectRatio(1.f), pattern(ASYMMETRIC_CIRCLES_GRID), mode(DETECTION), writeExtrinsics(false), writePoints(false), flipVertical(false), undistortImage(false), nframes(40), flags(0), delay(1000), prevTimestamp(0) {
     boardSize = cv::Size(4, 11);
     this->outputPath = outputPath;
+    this->delegate = delegate;
 }
 
 void Calibrator::startCapturing() {
@@ -279,6 +281,7 @@ void Calibrator::saveCameraParams(cv::Size imageSize, cv::Size boardSize,
         fs << "image_points" << imagePtMat;
     }
     printf("saved camera parameter to %s.", this->outputPath.c_str());
+    CalibrationComplete(delegate);
 }
 
 bool Calibrator::runAndSave(const vector<vector<Point2f> >& imagePoints,
@@ -297,7 +300,7 @@ bool Calibrator::runAndSave(const vector<vector<Point2f> >& imagePoints,
            ok ? "Calibration succeeded" : "Calibration failed",
            totalAvgErr);
     
-    if( ok )
+    if( ok ) {
         saveCameraParams(imageSize,
                          boardSize, squareSize, aspectRatio,
                          flags, cameraMatrix, distCoeffs,
@@ -306,5 +309,6 @@ bool Calibrator::runAndSave(const vector<vector<Point2f> >& imagePoints,
                          writeExtrinsics ? reprojErrs : vector<float>(),
                          writePoints ? imagePoints : vector<vector<Point2f> >(),
                          totalAvgErr );
+    }
     return ok;
 }
